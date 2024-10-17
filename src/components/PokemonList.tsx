@@ -6,7 +6,6 @@ import ThemeToggle from "./ThemeToggle";
 import PokemonModal from "./PokemonModal";
 import TypeDropdown from "./TypeDropdown";
 import { FaSearch } from "react-icons/fa";
-import debounce from "lodash/debounce";
 const PokemonItem = React.lazy(() => import("./PokemonItem"));
 
 interface Pokemon {
@@ -60,9 +59,9 @@ const PokemonList: React.FC = () => {
     fetchPokemons();
   }, []);
 
-  const handleSearch = debounce((event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
-  }, 300);
+  };
 
   const filteredPokemons = pokemons.filter((pokemon) => {
     const matchesType =

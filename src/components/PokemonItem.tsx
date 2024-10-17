@@ -64,7 +64,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
     <div
       className={`pokemon-item ${
         darkMode ? "bg-gray-800 shadow-gray-900" : "bg-white shadow-lg"
-      } shadow-lg rounded-lg p-6 m-4 transform transition-transform duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-105 relative`}
+      } shadow-lg rounded-lg p-6 m-4 transform transition-transform duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-105 relative cursor-pointer`}
       role="article"
       aria-labelledby={`pokemon-${pokemon.id}`}
       onMouseEnter={() => setIsHovered(true)} // Set hover state to true
