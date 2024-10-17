@@ -5,7 +5,8 @@ import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 import ThemeToggle from "./ThemeToggle";
 import PokemonModal from "./PokemonModal";
-import { FaSearch, FaFilter } from "react-icons/fa"; // Importing icons for search and filter
+import TypeDropdown from "./TypeDropdown"; // Import the new TypeDropdown component
+import { FaSearch } from "react-icons/fa"; // Importing necessary icons
 
 interface Pokemon {
   id: number;
@@ -62,10 +63,6 @@ const PokemonList: React.FC = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value);
-  };
-
   const filteredPokemons = pokemons.filter((pokemon) => {
     const matchesType =
       selectedType === "" ||
@@ -108,53 +105,28 @@ const PokemonList: React.FC = () => {
         }`}
       >
         <div className="flex flex-1 justify-between w-full items-center mb-4">
-          <div className="flex items-center">
-            <FaSearch
-              className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
-            />
-            <input
-              type="text"
-              placeholder="Search Pokémon"
-              value={searchTerm}
-              onChange={handleSearch}
-              className={`border p-2 rounded w-full max-w-md mx-auto shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
-                darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
-              }`}
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center">
+              <FaSearch
+                className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
+              />
+              <input
+                type="text"
+                placeholder="Search Pokémon"
+                value={searchTerm}
+                onChange={handleSearch}
+                className={`border p-2 rounded w-full max-w-md mx-auto shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
+                  darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+                }`}
+              />
+            </div>
+            <TypeDropdown
+              selectedType={selectedType}
+              onTypeChange={setSelectedType}
+              darkMode={darkMode}
             />
           </div>
           <ThemeToggle />
-        </div>
-
-        {/* Type Filter Dropdown with Icon */}
-        <div className="mb-4 flex items-center">
-          <FaFilter
-            className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
-          />
-          <label
-            htmlFor="type-filter"
-            className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
-          >
-            Filter by Type:
-          </label>
-          <select
-            id="type-filter"
-            value={selectedType}
-            onChange={handleTypeChange}
-            className={`border p-2 rounded shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
-              darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
-            }`}
-          >
-            <option value="">All Types</option>
-            <option value="fire">Fire</option>
-            <option value="water">Water</option>
-            <option value="grass">Grass</option>
-            <option value="electric">Electric</option>
-            <option value="ghost">Ghost</option>
-            <option value="dragon">Dragon</option>
-            <option value="bug">Bug</option>
-            <option value="fighting">Fighting</option>
-            {/* Add more types as needed */}
-          </select>
         </div>
 
         {loading ? (
