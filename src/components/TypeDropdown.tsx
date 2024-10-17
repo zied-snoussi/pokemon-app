@@ -1,4 +1,3 @@
-// src/components/TypeDropdown.tsx
 import React, { useState } from "react";
 import { BiFilter } from "react-icons/bi";
 import {
@@ -10,7 +9,7 @@ import {
   FaDragon,
   FaBug,
   FaFistRaised,
-} from "react-icons/fa"; // Import necessary icons
+} from "react-icons/fa";
 
 interface TypeDropdownProps {
   selectedType: string;
@@ -23,7 +22,7 @@ const TypeDropdown: React.FC<TypeDropdownProps> = ({
   onTypeChange,
   darkMode,
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown open/close
+  const [isOpen, setIsOpen] = useState(false);
 
   const types = [
     { value: "", label: "All Types" },
