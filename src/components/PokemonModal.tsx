@@ -11,6 +11,7 @@ import {
   FaLeaf,
   FaStar,
   FaWater,
+  FaArrowRight, // Import the arrow icon
 } from "react-icons/fa";
 import { TbEyeSearch } from "react-icons/tb";
 import { CgClose } from "react-icons/cg";
@@ -169,9 +170,10 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
         {/* Button to view more details */}
         <Link
           to={`/pokemon/${pokemon.id}`}
-          className="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600 transition duration-300"
+          className="mt-4 inline-flex items-center justify-center bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600 transition duration-300"
         >
           More Details
+          <FaArrowRight className="ml-2" />
         </Link>
       </motion.div>
     </motion.div>
