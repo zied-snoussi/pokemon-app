@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { useSelector } from "react-redux";
+import "./App.css";
+import PokemonList from "./components/PokemonList";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
-  const [count, setCount] = useState(0)
+  interface RootState {
+    theme: {
+      darkMode: boolean;
+    };
+  }
+
+  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      className={`App ${
+        darkMode
+          ? "bg-gray-900 text-white"
+          : "bg-gradient-to-r from-blue-200 to-blue-400 text-gray-800"
+      } min-h-screen p-4`}
+    >
+      <h1 className="text-4xl font-bold text-center mb-8">Pokémon List</h1>
+      <ThemeToggle />
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6 dark:bg-gray-800">
+        <PokemonList />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
