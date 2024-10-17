@@ -19,10 +19,10 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={handleToggle}
-      className={`flex items-center px-4 py-2 rounded transition duration-300 transform ${
+      className={`flex items-center px-4 py-2 rounded-md transition duration-300 transform ${
         darkMode
-          ? "bg-blue-600 text-white hover:bg-blue-700"
-          : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+          ? "bg-blue-600 text-white hover:bg-blue-700 border-2 border-blue-700"
+          : "bg-gray-300 text-gray-800 hover:bg-gray-400 border-2 border-gray-700"
       }`}
     >
       <svg

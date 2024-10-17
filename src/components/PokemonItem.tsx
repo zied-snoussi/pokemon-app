@@ -1,4 +1,16 @@
 import React, { useState } from "react";
+import {
+  FaFire,
+  FaWater,
+  FaLeaf,
+  FaBolt,
+  FaGhost,
+  FaDragon,
+  FaBug,
+  FaFistRaised,
+} from "react-icons/fa"; // Importing icons for types
+import { GiMountains, GiWeight } from "react-icons/gi"; // Importing icons for weight and height
+import { MdStar } from "react-icons/md"; // Importing icon for base experience
 
 interface Pokemon {
   id: number;
@@ -14,16 +26,39 @@ interface Pokemon {
 interface PokemonItemProps {
   pokemon: Pokemon;
   darkMode: boolean;
+  onSelect: (pokemon: Pokemon) => void; // Callback function to handle selection
 }
 
-/**
- * PokemonItem component displays individual Pokémon details.
- *
- * @param {PokemonItemProps} props - The Pokémon item props
- */
-const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, darkMode }) => {
-  // State to manage hover
+const PokemonItem: React.FC<PokemonItemProps> = ({
+  pokemon,
+  darkMode,
+  onSelect,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  // Function to get the appropriate icon based on the Pokémon type
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "fire":
+        return <FaFire className="mr-1 text-red-500" />;
+      case "water":
+        return <FaWater className="mr-1 text-blue-500" />;
+      case "grass":
+        return <FaLeaf className="mr-1 text-green-500" />;
+      case "electric":
+        return <FaBolt className="mr-1 text-yellow-500" />;
+      case "ghost":
+        return <FaGhost className="mr-1 text-purple-500" />;
+      case "dragon":
+        return <FaDragon className="mr-1 text-indigo-500" />;
+      case "bug":
+        return <FaBug className="mr-1 text-green-700" />;
+      case "fighting":
+        return <FaFistRaised className="mr-1 text-red-700" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div
@@ -34,6 +69,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, darkMode }) => {
       aria-labelledby={`pokemon-${pokemon.id}`}
       onMouseEnter={() => setIsHovered(true)} // Set hover state to true
       onMouseLeave={() => setIsHovered(false)} // Set hover state to false
+      onClick={() => onSelect(pokemon)} // Handle click to select the Pokémon
     >
       {isHovered && (
         <div
@@ -58,28 +94,37 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, darkMode }) => {
         alt={pokemon.name}
         className="w-32 h-32 object-cover mx-auto mb-4 transition-transform duration-500 transform hover:scale-110"
       />
-      <p
-        className={`text-gray-600 ${
-          darkMode ? "dark:text-gray-300" : "text-gray-600"
-        }`}
-      >
-        Base Experience:{" "}
-        <span className="font-semibold">{pokemon.base_experience}</span>
-      </p>
-      <p
-        className={`text-gray-600 ${
-          darkMode ? "dark:text-gray-300" : "text-gray-600"
-        }`}
-      >
-        Height: <span className="font-semibold">{pokemon.height}</span>
-      </p>
-      <p
-        className={`text-gray-600 ${
-          darkMode ? "dark:text-gray-300" : "text-gray-600"
-        }`}
-      >
-        Weight: <span className="font-semibold">{pokemon.weight}</span>
-      </p>
+      <div className="flex items-center mb-2">
+        <MdStar
+          className={`mr-1 ${darkMode ? "text-yellow-400" : "text-gray-600"}`}
+        />
+        <span
+          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
+        >
+          Base Experience:{" "}
+          <span className="font-semibold">{pokemon.base_experience}</span>
+        </span>
+      </div>
+      <div className="flex items-center mb-2">
+        <GiMountains
+          className={`mr-1 ${darkMode ? "text-green-500" : "text-gray-600"}`}
+        />
+        <span
+          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
+        >
+          Height: <span className="font-semibold">{pokemon.height}</span>
+        </span>
+      </div>
+      <div className="flex items-center mb-2">
+        <GiWeight
+          className={`mr-1 ${darkMode ? "text-blue-500" : "text-gray-600"}`}
+        />
+        <span
+          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
+        >
+          Weight: <span className="font-semibold">{pokemon.weight}</span>
+        </span>
+      </div>
 
       {/* Abilities with badges */}
       <div className="flex flex-wrap mb-2">
@@ -104,12 +149,12 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, darkMode }) => {
         ))}
       </div>
 
-      {/* Types with badges */}
+      {/* Types with icons */}
       <div className="flex flex-wrap">
         <span
           className={`text-sm ${
             darkMode ? "dark:text-gray-300" : "text-gray-600"
-          } mr-2`}
+          } mr-2 flex items-center`}
         >
           Type:
         </span>
@@ -120,10 +165,11 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, darkMode }) => {
               darkMode
                 ? "bg-green-600 text-white"
                 : "bg-green-200 text-green-800"
-            } text-xs font-semibold px-2 py-1 rounded-full mr-2 mb-2 transition duration-300 transform hover:bg-green-300 dark:hover:bg-green-500 cursor-pointer`}
+            } flex items-center text-xs font-semibold px-2 py-1 rounded-full mr-2 mb-2 transition duration-300 transform hover:bg-green-300 dark:hover:bg-green-500 cursor-pointer`}
             role="button"
             aria-label={`Type: ${type.type.name}`}
           >
+            {getTypeIcon(type.type.name)}
             {type.type.name}
           </span>
         ))}
