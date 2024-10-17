@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom"; // Import Link
 import {
   FaBolt,
   FaBug,
@@ -164,6 +165,14 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
             </li>
           ))}
         </ul>
+
+        {/* Button to view more details */}
+        <Link
+          to={`/pokemon/${pokemon.id}`}
+          className="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600 transition duration-300"
+        >
+          More Details
+        </Link>
       </motion.div>
     </motion.div>
   );

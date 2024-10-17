@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
 import store from "./store/store.ts";
+import App from "./App.tsx";
+import "./index.css";
 
 const client = new ApolloClient({
-  uri: "https://beta.pokeapi.co/graphql/v1beta", // PokeAPI GraphQL endpoint
+  uri: "https://beta.pokeapi.co/graphql/v1beta",
   cache: new InMemoryCache(),
 });
 
