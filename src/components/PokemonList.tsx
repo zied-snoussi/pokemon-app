@@ -105,17 +105,19 @@ const PokemonList: React.FC = () => {
           darkMode ? "bg-gray-900" : "bg-gray-100"
         }`}
       >
-        <div className="flex justify-between w-full items-center mb-4">
-          <div className="flex items-center">
+        <div className="flex justify-between w-full items-center mb-4 left-0">
+          <div className="relative w-full max-w-md mx-auto">
             <FaSearch
-              className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
+              className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${
+                darkMode ? "text-white" : "text-gray-800"
+              }`}
             />
             <input
               type="text"
               placeholder="Search Pokémon"
               value={searchTerm}
               onChange={handleSearch}
-              className={`border p-2 rounded w-full max-w-md mx-auto shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
+              className={`border pl-10 p-2 rounded w-full shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
                 darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
               }`}
             />
