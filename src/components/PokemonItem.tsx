@@ -9,10 +9,7 @@ import {
   FaBug,
   FaFistRaised,
   FaSkullCrossbones,
-} from "react-icons/fa"; // Importing icons for types
-import { GiMountains, GiWeight } from "react-icons/gi"; // Importing icons for weight and height
-import { MdStar } from "react-icons/md"; // Importing icon for base experience
-
+} from "react-icons/fa";
 interface Pokemon {
   id: number;
   name: string;
@@ -97,47 +94,9 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
         alt={pokemon.name}
         className="w-32 h-32 object-cover mx-auto mb-4 transition-transform duration-500 transform hover:scale-110"
       />
-      <div className="flex items-center mb-2">
-        <MdStar
-          className={`mr-1 ${darkMode ? "text-yellow-400" : "text-gray-600"}`}
-        />
-        <span
-          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
-        >
-          Base Experience:{" "}
-          <span className="font-semibold">{pokemon.base_experience}</span>
-        </span>
-      </div>
-      <div className="flex items-center mb-2">
-        <GiMountains
-          className={`mr-1 ${darkMode ? "text-green-500" : "text-gray-600"}`}
-        />
-        <span
-          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
-        >
-          Height: <span className="font-semibold">{pokemon.height}</span>
-        </span>
-      </div>
-      <div className="flex items-center mb-2">
-        <GiWeight
-          className={`mr-1 ${darkMode ? "text-blue-500" : "text-gray-600"}`}
-        />
-        <span
-          className={`text-gray-600 ${darkMode ? "dark:text-gray-300" : ""}`}
-        >
-          Weight: <span className="font-semibold">{pokemon.weight}</span>
-        </span>
-      </div>
 
       {/* Abilities with badges */}
       <div className="flex flex-wrap mb-2">
-        <span
-          className={`text-sm ${
-            darkMode ? "dark:text-gray-300" : "text-gray-600"
-          } mr-2`}
-        >
-          Abilities:
-        </span>
         {pokemon.abilities.map((ability) => (
           <span
             key={ability.ability.name}
@@ -154,20 +113,11 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
 
       {/* Types with icons */}
       <div className="flex flex-wrap">
-        <span
-          className={`text-sm ${
-            darkMode ? "dark:text-gray-300" : "text-gray-600"
-          } mr-2 flex items-center`}
-        >
-          Type:
-        </span>
         {pokemon.types.map((type) => (
           <span
             key={type.type.name}
             className={`${
-              darkMode
-                ? "bg-green-600 text-white"
-                : "bg-green-200 text-green-800"
+              darkMode ? "bg-red-600 text-white" : "bg-green-200 text-green-800"
             } flex items-center text-xs font-semibold px-2 py-1 rounded-full mr-2 mb-2 transition duration-300 transform hover:bg-green-300 dark:hover:bg-green-500 cursor-pointer`}
             role="button"
             aria-label={`Type: ${type.type.name}`}
