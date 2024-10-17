@@ -1,12 +1,13 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
-import PokemonItem from "./PokemonItem";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 import ThemeToggle from "./ThemeToggle";
 import PokemonModal from "./PokemonModal";
-import TypeDropdown from "./TypeDropdown"; // Import the new TypeDropdown component
-import { FaSearch } from "react-icons/fa"; // Importing necessary icons
+import TypeDropdown from "./TypeDropdown";
+import { FaSearch } from "react-icons/fa";
+import debounce from "lodash/debounce";
+const PokemonItem = React.lazy(() => import("./PokemonItem"));
 
 interface Pokemon {
   id: number;
@@ -59,9 +60,9 @@ const PokemonList: React.FC = () => {
     fetchPokemons();
   }, []);
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = debounce((event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
-  };
+  }, 300);
 
   const filteredPokemons = pokemons.filter((pokemon) => {
     const matchesType =
