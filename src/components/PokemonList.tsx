@@ -106,29 +106,29 @@ const PokemonList: React.FC = () => {
         }`}
       >
         <div className="flex justify-between w-full items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center">
-              <FaSearch
-                className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
-              />
-              <input
-                type="text"
-                placeholder="Search Pokémon"
-                value={searchTerm}
-                onChange={handleSearch}
-                className={`border p-2 rounded w-full max-w-md mx-auto shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
-                  darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
-                }`}
-              />
-            </div>
-            <TypeDropdown
-              selectedType={selectedType}
-              onTypeChange={setSelectedType}
-              darkMode={darkMode}
+          <div className="flex items-center">
+            <FaSearch
+              className={`mr-2 ${darkMode ? "text-white" : "text-gray-800"}`}
+            />
+            <input
+              type="text"
+              placeholder="Search Pokémon"
+              value={searchTerm}
+              onChange={handleSearch}
+              className={`border p-2 rounded w-full max-w-md mx-auto shadow-md focus:outline-none focus:ring focus:ring-blue-500 transition duration-300 ${
+                darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
+              }`}
             />
           </div>
-          <ThemeToggle />
+          <div className="ml-10">
+            <ThemeToggle />
+          </div>
         </div>
+        <TypeDropdown
+          selectedType={selectedType}
+          onTypeChange={setSelectedType}
+          darkMode={darkMode}
+        />
 
         {loading ? (
           <Loading />
