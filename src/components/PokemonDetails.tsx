@@ -27,6 +27,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import Loading from "./Loading";
 
 // Register necessary Chart.js components
 ChartJS.register(
@@ -56,7 +57,7 @@ const PokemonDetails: React.FC = () => {
     variables: { id: parseInt(id!) },
   });
 
-  if (loading) return <div className="text-center">Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <p className="text-red-500">{error.message}</p>;
 
   const pokemon = data.pokemon_v2_pokemon_by_pk;

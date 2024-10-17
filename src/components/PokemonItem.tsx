@@ -8,6 +8,7 @@ import {
   FaDragon,
   FaBug,
   FaFistRaised,
+  FaSkullCrossbones,
 } from "react-icons/fa"; // Importing icons for types
 import { GiMountains, GiWeight } from "react-icons/gi"; // Importing icons for weight and height
 import { MdStar } from "react-icons/md"; // Importing icon for base experience
@@ -55,6 +56,8 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
         return <FaBug className="mr-1 text-green-700" />;
       case "fighting":
         return <FaFistRaised className="mr-1 text-red-700" />;
+      case "poison":
+        return <FaSkullCrossbones className="mr-1 text-purple-500" />;
       default:
         return null;
     }

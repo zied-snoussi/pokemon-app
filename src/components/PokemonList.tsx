@@ -6,6 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 import PokemonModal from "./PokemonModal";
 import TypeDropdown from "./TypeDropdown";
 import { FaSearch } from "react-icons/fa";
+import Loading from "./Loading";
 const PokemonItem = React.lazy(() => import("./PokemonItem"));
 
 interface Pokemon {
@@ -130,10 +131,7 @@ const PokemonList: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center h-40">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-blue-500"></div>
-            <p className="ml-4 text-gray-700">Loading...</p>
-          </div>
+          <Loading />
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : (

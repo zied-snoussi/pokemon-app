@@ -11,7 +11,8 @@ import {
   FaLeaf,
   FaStar,
   FaWater,
-  FaArrowRight, // Import the arrow icon
+  FaArrowRight,
+  FaSkullCrossbones, // Import the arrow icon
 } from "react-icons/fa";
 import { TbEyeSearch } from "react-icons/tb";
 import { CgClose } from "react-icons/cg";
@@ -159,6 +160,13 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
                 <FaFistRaised
                   className={`mr-1 ${
                     darkMode ? "text-red-600" : "text-red-700"
+                  }`}
+                />
+              )}
+              {type.type.name === "poison" && (
+                <FaSkullCrossbones
+                  className={`mr-1 ${
+                    darkMode ? "text-purple-400" : "text-purple-500"
                   }`}
                 />
               )}

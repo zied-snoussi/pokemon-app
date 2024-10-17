@@ -9,6 +9,7 @@ import {
   FaDragon,
   FaBug,
   FaFistRaised,
+  FaSkullCrossbones,
 } from "react-icons/fa";
 
 interface TypeDropdownProps {
@@ -57,6 +58,11 @@ const TypeDropdown: React.FC<TypeDropdownProps> = ({
       value: "fighting",
       label: "Fighting",
       icon: <FaFistRaised className="text-red-700" />,
+    },
+    {
+      value: "poison",
+      label: "Poison",
+      icon: <FaSkullCrossbones className="text-purple-500" />,
     },
   ];
 
