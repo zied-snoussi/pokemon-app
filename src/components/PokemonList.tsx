@@ -105,7 +105,7 @@ const PokemonList: React.FC = () => {
           darkMode ? "bg-gray-900" : "bg-gray-100"
         }`}
       >
-        <div className="flex flex-1 justify-between w-full items-center mb-4">
+        <div className="flex justify-between w-full items-center mb-4">
           <div className="flex items-center space-x-2">
             <div className="flex items-center">
               <FaSearch
