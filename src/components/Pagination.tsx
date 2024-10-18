@@ -1,4 +1,5 @@
 import React from "react";
+import { BsThreeDots } from "react-icons/bs";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface PaginationProps {
@@ -33,6 +34,58 @@ const Pagination: React.FC<PaginationProps> = ({
     }
   };
 
+  const renderPageNumbers = () => {
+    const pages = [];
+    const maxPagesToShow = 4;
+    const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+
+    let startPage = Math.max(1, currentPage - halfMaxPagesToShow);
+    let endPage = Math.min(pageNumbers, currentPage + halfMaxPagesToShow);
+
+    if (currentPage <= halfMaxPagesToShow) {
+      endPage = Math.min(pageNumbers, maxPagesToShow);
+    }
+
+    if (currentPage + halfMaxPagesToShow >= pageNumbers) {
+      startPage = Math.max(1, pageNumbers - maxPagesToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => paginate(i)}
+          className={`p-2 border rounded-full transition duration-300 ${
+            currentPage === i
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-blue-500 dark:hover:text-white"
+          }`}
+          aria-label={`Page ${i}`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (startPage > 1) {
+      pages.unshift(
+        <span key="start-ellipsis" className="p-2">
+          <BsThreeDots className="text-gray-500" />
+        </span>
+      );
+    }
+
+    if (endPage < pageNumbers) {
+      pages.push(
+        <span key="end-ellipsis" className="p-2">
+          <BsThreeDots className="text-gray-500" />
+        </span>
+      );
+    }
+
+    return pages;
+  };
+
   return (
     <div className="pagination flex justify-center items-center mt-4 space-x-2">
       <button
@@ -47,20 +100,7 @@ const Pagination: React.FC<PaginationProps> = ({
       >
         <FaChevronLeft />
       </button>
-      {Array.from({ length: pageNumbers }, (_, i) => (
-        <button
-          key={i}
-          onClick={() => paginate(i + 1)}
-          className={`p-2 border rounded-full transition duration-300 ${
-            currentPage === i + 1
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-blue-500 dark:hover:text-white"
-          }`}
-          aria-label={`Page ${i + 1}`}
-        >
-          {i + 1}
-        </button>
-      ))}
+      {renderPageNumbers()}
       <button
         onClick={handleNext}
         className={`p-2 border rounded-full transition duration-300 ${
