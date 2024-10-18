@@ -102,33 +102,6 @@ npm test
 
 The project fetches data using Apollo Client with GraphQL. Pokémon data is fetched from a GraphQL API.
 
-### Example Pokémon Query:
-
-```graphql
-query getPokemonDetails($id: Int!) {
-  pokemon_v2_pokemon_by_pk(id: $id) {
-    id
-    name
-    base_experience
-    height
-    weight
-    pokemon_v2_pokemonabilities {
-      ability {
-        name
-      }
-    }
-    pokemon_v2_pokemontypes {
-      type {
-        name
-      }
-    }
-    pokemon_v2_pokemonsprites {
-      sprites
-    }
-  }
-}
-```
-
 ## Light/Dark Mode
 
 The app includes a theme toggle button that allows users to switch between light and dark modes. This is powered by Redux for state management and can be extended with additional theming options.
