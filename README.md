@@ -40,7 +40,7 @@ To start the development server, run the following command:
 npm run dev
 ```
 
-This will start the Vite development server with Hot Module Replacement (HMR). By default, the app will be available at `http://localhost:5173`.
+This will start the Vite development server with Hot Module Replacement (HMR). By default, the app will be available at [http://localhost:5173](http://localhost:5173).
 
 ### Building for Production
 
@@ -97,29 +97,6 @@ npm test
 - **React Router**: For managing routing between Pokémon list and detail pages.
 - **ESLint**: Linting tool for enforcing consistent coding styles and avoiding errors.
 - **Prettier**: Code formatter to keep codebase clean and consistent.
-
-## Project Structure
-
-```
-.
-├── public                # Static files
-├── src
-│   ├── assets            # Images and static assets
-│   ├── components        # Reusable components
-│   │   ├── PokemonList.tsx    # List of Pokémon
-│   │   ├── PokemonDetails.tsx # Pokémon details page
-│   │   ├── ThemeToggle.tsx    # Light/Dark mode toggle
-│   │   └── Pagination.tsx     # Pagination component
-│   ├── graphql           # GraphQL queries
-│   │   └── queries.ts     # GraphQL queries for Pokémon
-│   ├── store             # Redux store setup
-│   ├── styles            # Global styles and theme
-│   ├── App.tsx           # Main App component
-│   ├── main.tsx          # App entry point
-│   └── index.css         # Global styles
-├── package.json          # Project dependencies
-└── vite.config.ts        # Vite configuration
-```
 
 ## GraphQL Integration
 
@@ -182,6 +159,10 @@ export default themeSlice.reducer;
 
 The Pokémon details page includes charts (Bar and Radar) to visualize the Pokémon's stats, such as `base_experience`, `height`, and `weight`. This is done using `react-chartjs-2` and `Chart.js`.
 
+## Live Demo
+
+Check out the live demo of the app on Vercel: [Pokémon App](https://pokemon-app-beta-rouge.vercel.app/)
+
 ## License
 
 This project is licensed under the MIT License.
@@ -189,3 +170,18 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any inquiries, please reach out via email: `zied.alsnoussi@gmail.com`.
+
+
+### Explanation
+
+1. **Professional Comments:**
+   - Added clear and concise comments to explain the purpose of each part of the code, including meta tags, title, favicon, structured data, root div, and main script.
+
+2. **Ensure Accessibility:**
+   - Ensured the document is accessible by using appropriate attributes like `lang="en"` for the HTML tag.
+
+3. **Optimize Meta Tags:**
+   - Ensured meta tags are optimized for SEO and social sharing by including `description` and `keywords`.
+
+4. **Use Modern HTML Practices:**
+   - Used modern HTML practices, such as self-closing tags for meta and link elements.

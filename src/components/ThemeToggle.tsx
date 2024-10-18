@@ -1,19 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../store/themeSlice";
-import { FaSun, FaMoon } from "react-icons/fa"; // Importing icons for light and dark mode
+import { MOON_ICON, SUN_ICON } from "../lib";
+import { RootState } from "../types";
 
-const ThemeToggle: React.FC = () => {
+/**
+ * ThemeToggle component to switch between dark and light modes.
+ *
+ * @returns {JSX.Element} The rendered ThemeToggle component.
+ */
+const ThemeToggle: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  interface RootState {
-    theme: {
-      darkMode: boolean;
-    };
-  }
-
+  // Select the dark mode state from the Redux store
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
+  /**
+   * Handles the theme toggle action.
+   */
   const handleToggle = () => {
     dispatch(toggleTheme());
   };
@@ -26,12 +30,9 @@ const ThemeToggle: React.FC = () => {
           ? "bg-blue-600 text-white hover:bg-blue-700"
           : "bg-gray-300 text-gray-800 hover:bg-gray-400"
       }`}
+      aria-label="Toggle Theme"
     >
-      {darkMode ? (
-        <FaSun className="w-6 h-6 text-yellow-400" /> // Sun icon for light mode
-      ) : (
-        <FaMoon className="w-6 h-6 text-gray-800" /> // Moon icon for dark mode
-      )}
+      {darkMode ? SUN_ICON : MOON_ICON}
     </button>
   );
 };

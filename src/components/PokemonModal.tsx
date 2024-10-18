@@ -1,119 +1,32 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  FaBolt,
-  FaBug,
-  FaDragon,
-  FaFire,
-  FaFistRaised,
-  FaGhost,
-  FaLeaf,
-  FaWater,
-  FaArrowRight,
-  FaSkullCrossbones,
-} from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { TbEyeSearch } from "react-icons/tb";
 import { CgClose } from "react-icons/cg";
 import { MdHeight } from "react-icons/md";
+import { PokemonModalProps } from "../types";
+import { TYPE_ICONS } from "../lib";
 
-interface Sprite {
-  sprites: {
-    front_default: string;
-  };
-}
-
-interface Type {
-  pokemon_v2_type: {
-    name: string;
-  };
-}
-
-interface Stat {
-  pokemon_v2_stat: {
-    name: string;
-  };
-  base_stat: number;
-}
-
-interface Pokemon {
-  id: number;
-  name: string;
-  base_experience: number;
-  height: number;
-  is_default: boolean;
-  order: number;
-  pokemon_v2_pokemonsprites: Sprite[];
-  pokemon_v2_pokemontypes: Type[];
-  pokemon_v2_pokemonstats: Stat[];
-}
-
-interface PokemonModalProps {
-  pokemon: Pokemon | null;
-  onClose: () => void;
-  darkMode: boolean;
-}
-
-const PokemonModal: React.FC<PokemonModalProps> = ({
-  pokemon,
-  onClose,
-  darkMode,
-}) => {
+/**
+ * PokemonModal component to display detailed information about a Pokémon in a modal.
+ *
+ * @param {PokemonModalProps} props - The props for the component.
+ * @returns {JSX.Element | null} The rendered PokemonModal component or null if no Pokémon is provided.
+ */
+const PokemonModal: React.FC<PokemonModalProps> = memo(({ pokemon, onClose, darkMode }) => {
   if (!pokemon) return null;
 
-  const typeIcons: { [key: string]: JSX.Element } = {
-    water: (
-      <FaWater
-        className={`mr-1 ${darkMode ? "text-blue-400" : "text-blue-500"}`}
-      />
-    ),
-    grass: (
-      <FaLeaf
-        className={`mr-1 ${darkMode ? "text-green-400" : "text-green-500"}`}
-      />
-    ),
-    fire: (
-      <FaFire
-        className={`mr-1 ${darkMode ? "text-red-400" : "text-red-500"}`}
-      />
-    ),
-    electric: (
-      <FaBolt
-        className={`mr-1 ${darkMode ? "text-yellow-400" : "text-yellow-500"}`}
-      />
-    ),
-    ghost: (
-      <FaGhost
-        className={`mr-1 ${darkMode ? "text-purple-400" : "text-purple-500"}`}
-      />
-    ),
-    dragon: (
-      <FaDragon
-        className={`mr-1 ${darkMode ? "text-indigo-400" : "text-indigo-500"}`}
-      />
-    ),
-    bug: (
-      <FaBug
-        className={`mr-1 ${darkMode ? "text-green-600" : "text-green-700"}`}
-      />
-    ),
-    fighting: (
-      <FaFistRaised
-        className={`mr-1 ${darkMode ? "text-red-600" : "text-red-700"}`}
-      />
-    ),
-    poison: (
-      <FaSkullCrossbones
-        className={`mr-1 ${darkMode ? "text-purple-400" : "text-purple-500"}`}
-      />
-    ),
-  };
-
-  const renderTypes = () => (
+  /**
+   * Renders the types of the Pokémon.
+   *
+   * @returns {JSX.Element} The rendered types.
+   */
+  const renderTypes = (): JSX.Element => (
     <div className="flex mb-2">
       {pokemon.pokemon_v2_pokemontypes.map((type) => (
         <div key={type.pokemon_v2_type.name} className="flex items-center mr-2">
-          {typeIcons[type.pokemon_v2_type.name]}
+          {TYPE_ICONS[type.pokemon_v2_type.name]}
           <span className="font-semibold">{type.pokemon_v2_type.name}</span>
         </div>
       ))}
@@ -150,9 +63,7 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
           </button>
         </div>
         <img
-          src={
-            pokemon.pokemon_v2_pokemonsprites[0]?.sprites.front_default || ""
-          }
+          src={pokemon.pokemon_v2_pokemonsprites[0]?.sprites.front_default || ""}
           alt={pokemon.name}
           className="w-full h-auto rounded-lg mb-4"
         />
@@ -182,6 +93,6 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
       </motion.div>
     </motion.div>
   );
-};
+});
 
 export default PokemonModal;

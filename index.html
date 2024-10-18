@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta charset for character encoding -->
     <meta charset="utf-8" />
+
+    <!-- Meta viewport for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Meta description for SEO -->
     <meta
       name="description"
       content="Explore a list of Pokémon with detailed information and filters."
     />
-    <meta name="keywords" content="Pokémon, list, types, abilities, search" />
-    <title>Pokémon List App</title>
-    <link rel="icon" href="/pokemon-icon.svg" type="image/x-icon" />
-  </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Meta keywords for SEO -->
+    <meta name="keywords" content="Pokémon, list, types, abilities, search" />
+
+    <!-- Title of the web application -->
+    <title>Pokémon List App</title>
+
+    <!-- Favicon for the web application -->
+    <link rel="icon" href="/pokemon-icon.svg" type="image/x-icon" />
+
+    <!-- Structured data for SEO -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -30,5 +38,13 @@
         }
       }
     </script>
+  </head>
+
+  <body>
+    <!-- Root div for the React application -->
+    <div id="root"></div>
+
+    <!-- Main script for the React application -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,54 +1,13 @@
-import React, { useState } from "react";
-import {
-  FaFire,
-  FaWater,
-  FaLeaf,
-  FaBolt,
-  FaGhost,
-  FaDragon,
-  FaBug,
-  FaFistRaised,
-  FaSkullCrossbones,
-} from "react-icons/fa";
+import React, { useState, memo } from "react";
+import { PokemonItemProps } from "../types";
+import { TYPE_ICONS } from "../lib";
 
-// Define the exact types based on the provided structure
-interface Sprite {
-  sprites: {
-    front_default: string;
-  };
-}
-
-interface Type {
-  pokemon_v2_type: {
-    name: string;
-  };
-}
-
-interface Stat {
-  pokemon_v2_stat: {
-    name: string;
-  };
-  base_stat: number;
-}
-
-interface Pokemon {
-  id: number;
-  name: string;
-  base_experience: number;
-  height: number;
-  is_default: boolean;
-  order: number;
-  pokemon_v2_pokemonsprites: Sprite[];
-  pokemon_v2_pokemontypes: Type[];
-  pokemon_v2_pokemonstats: Stat[];
-}
-
-interface PokemonItemProps {
-  pokemon: Pokemon;
-  darkMode: boolean;
-  onSelect: (pokemon: Pokemon) => void; // Callback function to handle selection
-}
-
+/**
+ * PokemonItem component to display a single Pokémon item.
+ *
+ * @param {PokemonItemProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered PokemonItem component.
+ */
 const PokemonItem: React.FC<PokemonItemProps> = ({
   pokemon,
   darkMode,
@@ -56,24 +15,12 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Function to get the appropriate icon based on the Pokémon type
-  const getTypeIcon = (type: string) => {
-    const icons: { [key: string]: JSX.Element } = {
-      fire: <FaFire className="mr-1 text-red-500" />,
-      water: <FaWater className="mr-1 text-blue-500" />,
-      grass: <FaLeaf className="mr-1 text-green-500" />,
-      electric: <FaBolt className="mr-1 text-yellow-500" />,
-      ghost: <FaGhost className="mr-1 text-purple-500" />,
-      dragon: <FaDragon className="mr-1 text-indigo-500" />,
-      bug: <FaBug className="mr-1 text-green-700" />,
-      fighting: <FaFistRaised className="mr-1 text-red-700" />,
-      poison: <FaSkullCrossbones className="mr-1 text-purple-500" />,
-    };
-    return icons[type] || null;
-  };
-
-  // Rendering types
-  const renderTypes = () => (
+  /**
+   * Renders the types of the Pokémon.
+   *
+   * @returns {JSX.Element} The rendered types.
+   */
+  const renderTypes = (): JSX.Element => (
     <div className="flex flex-wrap">
       {pokemon.pokemon_v2_pokemontypes.map((type) => (
         <span
@@ -84,18 +31,17 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
           role="button"
           aria-label={`Type: ${type.pokemon_v2_type.name}`}
         >
-          {getTypeIcon(type.pokemon_v2_type.name)}
+          {TYPE_ICONS[type.pokemon_v2_type.name]}
           {type.pokemon_v2_type.name}
         </span>
       ))}
     </div>
   );
 
-  // Get the front_default sprite URL from the array
   const spriteUrl =
     pokemon.pokemon_v2_pokemonsprites.length > 0
       ? pokemon.pokemon_v2_pokemonsprites[0].sprites.front_default
-      : ""; // Fallback if no sprites are available
+      : "";
 
   return (
     <div
@@ -117,7 +63,6 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
           }}
         />
       )}
-
       <h3
         id={`pokemon-${pokemon.id}`}
         className={`text-2xl font-bold text-center ${
@@ -131,10 +76,9 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
         alt={pokemon.name}
         className="w-32 h-32 object-cover mx-auto mb-4 transition-transform duration-500 transform hover:scale-110"
       />
-
-      {renderTypes()} {/* Render types only */}
+      {renderTypes()}
     </div>
   );
 };
 
-export default PokemonItem;
+export default memo(PokemonItem);

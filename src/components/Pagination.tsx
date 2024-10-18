@@ -1,39 +1,46 @@
-import React from "react";
-import { BsThreeDots } from "react-icons/bs";
+import React, { memo } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-interface PaginationProps {
-  totalPokemons: number;
-  pokemonsPerPage: number;
-  currentPage: number;
-  paginate: (pageNumber: number) => void;
-}
+import { PaginationProps } from "../types";
+import { THREE_DOTS_ICON } from "../lib";
 
 /**
  * Pagination component to navigate through Pokémon pages.
  *
- * @param {PaginationProps} props - The pagination props
+ * @param {PaginationProps} props - The pagination props.
+ * @returns {JSX.Element} The rendered Pagination component.
  */
 const Pagination: React.FC<PaginationProps> = ({
   totalPokemons,
   pokemonsPerPage,
   currentPage,
   paginate,
+  darkMode,
 }) => {
   const pageNumbers = Math.ceil(totalPokemons / pokemonsPerPage);
 
+  /**
+   * Handles the previous page button click.
+   */
   const handlePrevious = () => {
     if (currentPage > 1) {
       paginate(currentPage - 1);
     }
   };
 
+  /**
+   * Handles the next page button click.
+   */
   const handleNext = () => {
     if (currentPage < pageNumbers) {
       paginate(currentPage + 1);
     }
   };
 
+  /**
+   * Renders the page numbers with ellipsis for large page ranges.
+   *
+   * @returns {JSX.Element[]} The rendered page numbers.
+   */
   const renderPageNumbers = () => {
     const pages = [];
     const maxPagesToShow = 3;
@@ -57,8 +64,10 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={() => paginate(i)}
           className={`p-2 border rounded-full transition duration-300 ${
             currentPage === i
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-blue-500 dark:hover:text-white"
+              ? "bg-blue-500 text-white"
+              : darkMode
+              ? "bg-gray-700 text-white"
+              : "bg-gray-200 text-gray-800"
           }`}
           aria-label={`Page ${i}`}
         >
@@ -70,7 +79,7 @@ const Pagination: React.FC<PaginationProps> = ({
     if (startPage > 1) {
       pages.unshift(
         <span key="start-ellipsis" className="p-2">
-          <BsThreeDots className="text-gray-500" />
+          {THREE_DOTS_ICON}
         </span>
       );
     }
@@ -78,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = ({
     if (endPage < pageNumbers) {
       pages.push(
         <span key="end-ellipsis" className="p-2">
-          <BsThreeDots className="text-gray-500" />
+          {THREE_DOTS_ICON}
         </span>
       );
     }
@@ -117,4 +126,4 @@ const Pagination: React.FC<PaginationProps> = ({
   );
 };
 
-export default Pagination;
+export default memo(Pagination);

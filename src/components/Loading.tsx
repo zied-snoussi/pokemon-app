@@ -1,14 +1,14 @@
-// src/components/Loading.tsx
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../types";
 
-interface RootState {
-  theme: {
-    darkMode: boolean;
-  };
-}
-
+/**
+ * Loading component to display a loading spinner and message.
+ *
+ * @returns {JSX.Element} The rendered Loading component.
+ */
 const Loading: React.FC = () => {
+  // Select the dark mode state from the Redux store
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
   return (
@@ -44,4 +44,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export default Loading;
+export default memo(Loading);
