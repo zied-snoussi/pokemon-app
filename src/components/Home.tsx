@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import PokemonList from "./PokemonList";
 
-function Home() {
-  interface RootState {
-    theme: {
-      darkMode: boolean;
-    };
-  }
+interface RootState {
+  theme: {
+    darkMode: boolean;
+  };
+}
 
+function Home() {
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
   return (

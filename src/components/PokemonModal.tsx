@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import {
   FaBolt,
   FaBug,
@@ -9,25 +9,43 @@ import {
   FaFistRaised,
   FaGhost,
   FaLeaf,
-  FaStar,
   FaWater,
   FaArrowRight,
-  FaSkullCrossbones, // Import the arrow icon
+  FaSkullCrossbones,
 } from "react-icons/fa";
 import { TbEyeSearch } from "react-icons/tb";
 import { CgClose } from "react-icons/cg";
-import { GiWeight } from "react-icons/gi";
 import { MdHeight } from "react-icons/md";
+
+interface Sprite {
+  sprites: {
+    front_default: string;
+  };
+}
+
+interface Type {
+  pokemon_v2_type: {
+    name: string;
+  };
+}
+
+interface Stat {
+  pokemon_v2_stat: {
+    name: string;
+  };
+  base_stat: number;
+}
 
 interface Pokemon {
   id: number;
   name: string;
   base_experience: number;
   height: number;
-  weight: number;
-  abilities: Array<{ ability: { name: string; url: string } }>;
-  sprites: { front_default: string };
-  types: Array<{ type: { name: string; url: string } }>;
+  is_default: boolean;
+  order: number;
+  pokemon_v2_pokemonsprites: Sprite[];
+  pokemon_v2_pokemontypes: Type[];
+  pokemon_v2_pokemonstats: Stat[];
 }
 
 interface PokemonModalProps {
@@ -42,6 +60,65 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
   darkMode,
 }) => {
   if (!pokemon) return null;
+
+  const typeIcons: { [key: string]: JSX.Element } = {
+    water: (
+      <FaWater
+        className={`mr-1 ${darkMode ? "text-blue-400" : "text-blue-500"}`}
+      />
+    ),
+    grass: (
+      <FaLeaf
+        className={`mr-1 ${darkMode ? "text-green-400" : "text-green-500"}`}
+      />
+    ),
+    fire: (
+      <FaFire
+        className={`mr-1 ${darkMode ? "text-red-400" : "text-red-500"}`}
+      />
+    ),
+    electric: (
+      <FaBolt
+        className={`mr-1 ${darkMode ? "text-yellow-400" : "text-yellow-500"}`}
+      />
+    ),
+    ghost: (
+      <FaGhost
+        className={`mr-1 ${darkMode ? "text-purple-400" : "text-purple-500"}`}
+      />
+    ),
+    dragon: (
+      <FaDragon
+        className={`mr-1 ${darkMode ? "text-indigo-400" : "text-indigo-500"}`}
+      />
+    ),
+    bug: (
+      <FaBug
+        className={`mr-1 ${darkMode ? "text-green-600" : "text-green-700"}`}
+      />
+    ),
+    fighting: (
+      <FaFistRaised
+        className={`mr-1 ${darkMode ? "text-red-600" : "text-red-700"}`}
+      />
+    ),
+    poison: (
+      <FaSkullCrossbones
+        className={`mr-1 ${darkMode ? "text-purple-400" : "text-purple-500"}`}
+      />
+    ),
+  };
+
+  const renderTypes = () => (
+    <div className="flex mb-2">
+      {pokemon.pokemon_v2_pokemontypes.map((type) => (
+        <div key={type.pokemon_v2_type.name} className="flex items-center mr-2">
+          {typeIcons[type.pokemon_v2_type.name]}
+          <span className="font-semibold">{type.pokemon_v2_type.name}</span>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <motion.div
@@ -62,126 +139,45 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
           <h2 className="text-2xl font-bold capitalize">{pokemon.name}</h2>
           <button
             onClick={onClose}
-            className="text-gray-600 hover:text-gray-800"
+            className={`rounded-full p-2 transition duration-300 ${
+              darkMode
+                ? "text-white hover:bg-gray-700"
+                : "text-gray-900 hover:bg-gray-200"
+            }`}
+            aria-label="Close"
           >
-            <CgClose className="h-8 w-8" />
+            <CgClose />
           </button>
         </div>
         <img
-          src={pokemon.sprites.front_default}
+          src={
+            pokemon.pokemon_v2_pokemonsprites[0]?.sprites.front_default || ""
+          }
           alt={pokemon.name}
-          className="w-32 h-32 mb-4 mx-auto rounded-full border border-gray-200 shadow"
+          className="w-full h-auto rounded-lg mb-4"
         />
         <div className="flex items-center mb-2">
-          <FaStar
+          <MdHeight
             className={`mr-1 ${
-              darkMode ? "text-yellow-400" : "text-yellow-500"
+              darkMode ? "text-purple-300" : "text-purple-500"
             }`}
           />
           <span className="font-semibold">
-            Base Experience: {pokemon.base_experience}
+            Height: {pokemon.height * 10} cm
           </span>
         </div>
-        <div className="flex items-center mb-2">
-          <MdHeight
-            className={`mr-1 ${darkMode ? "text-green-300" : "text-green-500"}`}
-          />
-          <span className="font-semibold">Height: {pokemon.height} dm</span>
-        </div>
-        <div className="flex items-center mb-2">
-          <GiWeight
-            className={`mr-1 ${darkMode ? "text-blue-300" : "text-blue-500"}`}
-          />
-          <span className="font-semibold">Weight: {pokemon.weight} hg</span>
-        </div>
-        <h3 className="mt-4 font-semibold">Abilities:</h3>
-        <ul className="list-disc ml-4">
-          {pokemon.abilities.map((ability) => (
-            <li key={ability.ability.name} className="flex items-center">
-              <TbEyeSearch className={`text-purple-500 mr-1`} />
-              {ability.ability.name}
-            </li>
-          ))}
-        </ul>
-        <h3 className="mt-4 font-semibold">Types:</h3>
-        <ul className="list-disc ml-4">
-          {pokemon.types.map((type) => (
-            <li key={type.type.name} className="flex items-center">
-              {type.type.name === "water" && (
-                <FaWater
-                  className={`mr-1 ${
-                    darkMode ? "text-blue-400" : "text-blue-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "grass" && (
-                <FaLeaf
-                  className={`mr-1 ${
-                    darkMode ? "text-green-400" : "text-green-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "fire" && (
-                <FaFire
-                  className={`mr-1 ${
-                    darkMode ? "text-red-400" : "text-red-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "electric" && (
-                <FaBolt
-                  className={`mr-1 ${
-                    darkMode ? "text-yellow-400" : "text-yellow-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "ghost" && (
-                <FaGhost
-                  className={`mr-1 ${
-                    darkMode ? "text-purple-400" : "text-purple-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "dragon" && (
-                <FaDragon
-                  className={`mr-1 ${
-                    darkMode ? "text-indigo-400" : "text-indigo-500"
-                  }`}
-                />
-              )}
-              {type.type.name === "bug" && (
-                <FaBug
-                  className={`mr-1 ${
-                    darkMode ? "text-green-600" : "text-green-700"
-                  }`}
-                />
-              )}
-              {type.type.name === "fighting" && (
-                <FaFistRaised
-                  className={`mr-1 ${
-                    darkMode ? "text-red-600" : "text-red-700"
-                  }`}
-                />
-              )}
-              {type.type.name === "poison" && (
-                <FaSkullCrossbones
-                  className={`mr-1 ${
-                    darkMode ? "text-purple-400" : "text-purple-500"
-                  }`}
-                />
-              )}
-              {type.type.name}
-            </li>
-          ))}
-        </ul>
-
-        {/* Button to view more details */}
-        <Link
-          to={`/pokemon/${pokemon.id}`}
-          className="mt-4 inline-flex items-center justify-center bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600 transition duration-300"
-        >
-          More Details
-          <FaArrowRight className="ml-2" />
+        <h3 className="font-semibold mb-2">Types:</h3>
+        {pokemon.pokemon_v2_pokemontypes.length > 0 ? (
+          renderTypes()
+        ) : (
+          <span>No types available</span>
+        )}
+        <Link to={`/pokemon/${pokemon.id}`}>
+          <button className="flex items-center justify-center w-full py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-600">
+            <TbEyeSearch className="mr-2" />
+            View More
+            <FaArrowRight className="ml-2" />
+          </button>
         </Link>
       </motion.div>
     </motion.div>

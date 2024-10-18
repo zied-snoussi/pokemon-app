@@ -1,5 +1,5 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
-import axios from "axios";
+import React, { useState, Suspense } from "react";
+import { useQuery } from "@apollo/client";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 import ThemeToggle from "./ThemeToggle";
@@ -7,23 +7,44 @@ import PokemonModal from "./PokemonModal";
 import TypeDropdown from "./TypeDropdown";
 import { FaSearch } from "react-icons/fa";
 import Loading from "./Loading";
+import { GET_POKEMONS } from "../graphql/queries";
+
 const PokemonItem = React.lazy(() => import("./PokemonItem"));
+
+interface Sprite {
+  sprites: {
+    front_default: string;
+  };
+}
+
+interface Type {
+  pokemon_v2_type: {
+    name: string;
+  };
+  type_id: number;
+}
+
+interface Stat {
+  pokemon_v2_stat: {
+    name: string;
+  };
+  base_stat: number;
+  stat_id: number;
+}
 
 interface Pokemon {
   id: number;
   name: string;
   base_experience: number;
   height: number;
-  weight: number;
-  abilities: Array<{ ability: { name: string; url: string } }>;
-  sprites: { front_default: string };
-  types: Array<{ type: { name: string; url: string } }>;
+  is_default: boolean;
+  order: number;
+  pokemon_v2_pokemonsprites: Sprite[];
+  pokemon_v2_pokemontypes: Type[];
+  pokemon_v2_pokemonstats: Stat[];
 }
 
 const PokemonList: React.FC = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pokemonsPerPage] = useState<number>(10);
@@ -38,36 +59,22 @@ const PokemonList: React.FC = () => {
 
   const darkMode = useSelector((state: RootState) => state.theme.darkMode);
 
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=50"
-        );
-        const pokemonData = await Promise.all(
-          response.data.results.map((pokemon: { url: string }) =>
-            axios.get(pokemon.url).then((res) => res.data)
-          )
-        );
-        setPokemons(pokemonData);
-        setLoading(false);
-      } catch {
-        setError("Failed to fetch Pokémon data.");
-        setLoading(false);
-      }
-    };
+  const { loading, error, data } = useQuery(GET_POKEMONS, {
+    variables: { limit: 50 }, // You can adjust the limit as needed
+  });
 
-    fetchPokemons();
-  }, []);
+  const pokemons: Pokemon[] = data ? data.pokemon_v2_pokemon : [];
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
   const filteredPokemons = pokemons.filter((pokemon) => {
     const matchesType =
       selectedType === "" ||
-      pokemon.types.some((type) => type.type.name === selectedType);
+      pokemon.pokemon_v2_pokemontypes.some(
+        (type) => type.pokemon_v2_type.name === selectedType
+      );
 
     const matchesSearch = pokemon.name
       .toLowerCase()
@@ -95,11 +102,13 @@ const PokemonList: React.FC = () => {
 
   return (
     <>
-      <PokemonModal
-        onClose={onClose}
-        pokemon={pokemonSelected}
-        darkMode={darkMode}
-      />
+      {pokemonSelected !== null ? (
+        <PokemonModal
+          onClose={onClose}
+          pokemon={pokemonSelected}
+          darkMode={darkMode}
+        />
+      ) : null}
       <div
         className={`pokemon-list p-4 ${
           darkMode ? "bg-gray-900" : "bg-gray-100"
@@ -135,18 +144,20 @@ const PokemonList: React.FC = () => {
         {loading ? (
           <Loading />
         ) : error ? (
-          <p className="text-center text-red-500">{error}</p>
+          <p className="text-center text-red-500">{error.message}</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {currentPokemons.map((pokemon) => (
-              <PokemonItem
-                key={pokemon.id}
-                pokemon={pokemon}
-                darkMode={darkMode}
-                onSelect={onSelectPokemon}
-              />
-            ))}
-          </div>
+          <Suspense fallback={<Loading />}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {currentPokemons.map((pokemon) => (
+                <PokemonItem
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                  darkMode={darkMode}
+                  onSelect={() => onSelectPokemon(pokemon)}
+                />
+              ))}
+            </div>
+          </Suspense>
         )}
         {/* Pagination component */}
         <Pagination

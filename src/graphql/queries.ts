@@ -2,29 +2,35 @@ import { gql } from '@apollo/client';
 
 // Query to get a list of Pokémon
 export const GET_POKEMONS = gql`
-  query getPokemons($limit: Int!) {
-    pokemon_v2_pokemon(limit: $limit) {
-      id
-      name
-      base_experience
-      height
-      weight
-      pokemon_v2_pokemonabilities {
-        ability: pokemon_v2_ability {
-          name
-        }
+query getPokemons($limit: Int!) {
+  pokemon_v2_pokemon(limit: $limit) {
+    id
+    base_experience
+    height
+    is_default
+    name
+    order
+    pokemon_v2_pokemonsprites {
+      sprites
+    }
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
       }
-      pokemon_v2_pokemontypes {
-        type: pokemon_v2_type {
-          name
-        }
+      type_id
+    }
+    pokemon_v2_pokemonstats {
+      pokemon_v2_stat {
+        name
       }
-      pokemon_v2_pokemonsprites {
-        front_default
-      }
+      base_stat
+      stat_id
     }
   }
+}
 `;
+
+
 
 export const GET_POKEMON_DETAILS = gql`
   query getPokemonDetails($id: Int!) {
@@ -33,19 +39,23 @@ export const GET_POKEMON_DETAILS = gql`
       name
       base_experience
       height
-      weight
-      pokemon_v2_pokemonabilities {
-        ability: pokemon_v2_ability {
-          name
-        }
-      }
-      pokemon_v2_pokemontypes {
-        type: pokemon_v2_type {
-          name
-        }
-      }
+      is_default
+      order
       pokemon_v2_pokemonsprites {
         sprites
+      }
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+        }
+        type_id
+      }
+      pokemon_v2_pokemonstats {
+        pokemon_v2_stat {
+          name
+        }
+        base_stat
+        stat_id
       }
     }
   }
