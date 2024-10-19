@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
+import { ThemeToggle } from "./";
 import { PokemonHeaderProps } from "../types";
 
 /**
