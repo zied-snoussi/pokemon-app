@@ -24,7 +24,7 @@ import {
 const PokemonList: React.FC = (): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pokemonsPerPage] = useState<number>(10);
+  const [pokemonsPerPage] = useState<number>(12);
   const [selectedType, setSelectedType] = useState<string>("");
   const [statFilter, setStatFilter] = useState<{ stat: string; value: number }>(
     {
