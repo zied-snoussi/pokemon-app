@@ -136,6 +136,12 @@ The Pokémon details page includes charts (Bar and Radar) to visualize the Poké
 
 Check out the live demo of the app on Vercel: [Pokémon App](https://pokemon-app-beta-rouge.vercel.app/)
 
+## Lighthouse Performance
+
+The app has been tested with Lighthouse to ensure optimal performance, accessibility, best practices, and SEO.
+
+![Lighthouse Test Results](image.png)
+
 ## License
 
 This project is licensed under the MIT License.
@@ -143,7 +149,6 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any inquiries, please reach out via email: `zied.alsnoussi@gmail.com`.
-
 
 ### Explanation
 
