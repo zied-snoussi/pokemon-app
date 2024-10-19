@@ -149,17 +149,3 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any inquiries, please reach out via email: `zied.alsnoussi@gmail.com`.
-
-### Explanation
-
-1. **Professional Comments:**
-   - Added clear and concise comments to explain the purpose of each part of the code, including meta tags, title, favicon, structured data, root div, and main script.
-
-2. **Ensure Accessibility:**
-   - Ensured the document is accessible by using appropriate attributes like `lang="en"` for the HTML tag.
-
-3. **Optimize Meta Tags:**
-   - Ensured meta tags are optimized for SEO and social sharing by including `description` and `keywords`.
-
-4. **Use Modern HTML Practices:**
-   - Used modern HTML practices, such as self-closing tags for meta and link elements.
