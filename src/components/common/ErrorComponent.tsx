@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { ErrorComponentProps } from "../types";
+import { ErrorComponentProps } from "../../types";
 
 /**
  * ErrorComponent to display an error message with a reload button.

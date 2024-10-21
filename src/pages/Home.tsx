@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Footer, Header, PokemonList } from "../components";
 import { RootState } from "../types";
+import { Footer, Header } from "../components/layout";
+import { PokemonList } from "../components/pokemon";
 
 /**
  * Home component that serves as the main page of the application.

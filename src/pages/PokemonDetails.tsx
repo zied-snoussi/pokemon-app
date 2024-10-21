@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../types";
 import { GET_POKEMON_DETAILS } from "../graphql/queries";
 import {
-  Loading,
   PokemonHeader,
   PokemonStats,
   PokemonTypes,
-} from "../components";
+} from "../components/pokemon";
+import { Loading } from "../components/common";
 
 /**
  * Component to display detailed information about a specific Pokémon.

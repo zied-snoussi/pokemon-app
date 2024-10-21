@@ -1,6 +1,6 @@
 import React, { useState, memo } from "react";
-import { PokemonItemProps } from "../types";
-import { TYPE_ICONS } from "../lib";
+import { PokemonItemProps } from "../../types";
+import { TYPE_ICONS } from "../../lib";
 
 /**
  * PokemonItem component to display a single Pokémon item.

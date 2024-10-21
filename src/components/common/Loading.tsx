@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../types";
+import { RootState } from "../../types";
 
 /**
  * Loading component to display a loading spinner and message.

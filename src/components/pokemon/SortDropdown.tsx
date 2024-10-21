@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { FaSort } from "react-icons/fa";
-import { SORT_OPTIONS } from "../lib";
-import { SortDropdownProps } from "../types";
+import { SORT_OPTIONS } from "../../lib";
+import { SortDropdownProps } from "../../types";
 
 /**
  * SortDropdown component for sorting Pokémon by various criteria.

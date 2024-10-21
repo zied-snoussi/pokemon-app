@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../types";
+import { RootState } from "../../types";
 
 /**
  * Footer component to display the footer with a message and a link.

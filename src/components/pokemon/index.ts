@@ -1,9 +1,5 @@
 export { default as PokemonGrid } from './PokemonGrid';
 export { default as PokemonItem } from './PokemonItem';
-export { default as Loading } from './Loading';
-export { default as Header } from './Header';
-export { default as ErrorComponent } from './ErrorComponent';
-export { default as Footer } from './Footer';
 export { default as Pagination } from './Pagination';
 export { default as PokemonList } from './PokemonList';
 export { default as PokemonModal } from './PokemonModal';
@@ -11,7 +7,6 @@ export { default as SearchInput } from './SearchInput';
 export { default as SortDropdown } from './SortDropdown';
 export { default as StatFilter } from './StatFilter';
 export { default as TypeDropdown } from './TypeDropdown';
-export { default as ThemeToggle } from './ThemeToggle';
 export { default as PokemonHeader } from './PokemonHeader';
 export { default as PokemonStats } from './PokemonStats';
 export { default as PokemonTypes } from './PokemonTypes';

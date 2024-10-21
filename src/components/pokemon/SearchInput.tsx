@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { FaSearch } from "react-icons/fa";
-import { SearchInputProps } from "../types";
+import { SearchInputProps } from "../../types";
 
 /**
  * SearchInput component for searching Pokémon.

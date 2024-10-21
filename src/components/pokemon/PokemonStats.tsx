@@ -12,7 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { PokemonStatsProps } from "../types";
+import { PokemonStatsProps } from "../../types";
 
 // Register necessary Chart.js components
 ChartJS.register(

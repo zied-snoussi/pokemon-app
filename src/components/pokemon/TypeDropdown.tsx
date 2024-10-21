@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FILTER_ICON, TYPES_POKEMON } from "../lib";
-import { TypeDropdownProps } from "../types";
+import { FILTER_ICON, TYPES_POKEMON } from "../../lib";
+import { TypeDropdownProps } from "../../types";
 
 /**
  * TypeDropdown component for filtering Pokémon by type.

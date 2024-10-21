@@ -1,7 +1,8 @@
 import React, { Suspense, memo } from "react";
 
-import { PokemonGridProps } from "../types";
-import { Loading, PokemonItem } from ".";
+import { PokemonGridProps } from "../../types";
+import { Loading } from "../common";
+import PokemonItem from "./PokemonItem";
 
 /**
  * PokemonGrid component to display a grid of Pokémon items.

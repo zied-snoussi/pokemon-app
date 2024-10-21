@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../store/themeSlice";
-import { MOON_ICON, SUN_ICON } from "../lib";
-import { RootState } from "../types";
+import { toggleTheme } from "../../store/themeSlice";
+import { MOON_ICON, SUN_ICON } from "../../lib";
+import { RootState } from "../../types";
 
 /**
  * ThemeToggle component to switch between dark and light modes.

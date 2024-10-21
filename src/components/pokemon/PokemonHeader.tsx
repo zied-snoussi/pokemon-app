@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { ThemeToggle } from "./";
-import { PokemonHeaderProps } from "../types";
+import { PokemonHeaderProps } from "../../types";
+import ThemeToggle from "../theme";
 
 /**
  * PokemonHeader component to display the header and image of a Pokémon.

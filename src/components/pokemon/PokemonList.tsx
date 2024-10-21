@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
-import { GET_POKEMONS } from "../graphql/queries";
-import { Pokemon, RootState } from "../types";
-import {
-  ErrorComponent,
-  Loading,
-  Pagination,
-  PokemonGrid,
-  PokemonModal,
-  SearchInput,
-  SortDropdown,
-  StatFilter,
-  ThemeToggle,
-  TypeDropdown,
-} from "./";
+import { GET_POKEMONS } from "../../graphql/queries";
+import { Pokemon, RootState } from "../../types";
+import PokemonModal from "./PokemonModal";
+import SearchInput from "./SearchInput";
+import ThemeToggle from "../theme";
+import TypeDropdown from "./TypeDropdown";
+import StatFilter from "./StatFilter";
+import SortDropdown from "./SortDropdown";
+import { ErrorComponent, Loading } from "../common";
+import PokemonGrid from "./PokemonGrid";
+import Pagination from "./Pagination";
 
 /**
  * PokemonList component to display a list of Pokémon with various filters and sorting options.

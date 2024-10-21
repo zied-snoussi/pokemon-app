@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import { TYPE_ICONS } from "../lib";
-import { PokemonTypesProps } from "../types";
+import { TYPE_ICONS } from "../../lib";
+import { PokemonTypesProps } from "../../types";
 
 /**
  * PokemonTypes component to display the types of a Pokémon.

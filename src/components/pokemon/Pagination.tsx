@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { PaginationProps } from "../types";
-import { THREE_DOTS_ICON } from "../lib";
+import { PaginationProps } from "../../types";
+import { THREE_DOTS_ICON } from "../../lib";
 
 /**
  * Pagination component to navigate through Pokémon pages.

@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFistRaised } from "react-icons/fa";
-import { StatFilterProps } from "../types";
+import { StatFilterProps } from "../../types";
 
 /**
  * StatFilter component for filtering Pokémon by a specific stat value.
